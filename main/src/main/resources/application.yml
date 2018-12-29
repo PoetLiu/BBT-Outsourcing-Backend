@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/kettle_conmunity?serverTimezone=Asia/Shanghai
+    username: root
+    password: 59080125
+    type: com.alibaba.druid.pool.DruidDataSource
