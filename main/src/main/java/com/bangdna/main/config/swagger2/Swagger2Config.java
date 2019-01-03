@@ -33,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("帮帮团外包网站 API Documentation")
-                .description("帮帮团外包后台接口文档")
+                .title("棒棒团外包网站 API Documentation")
+                .description("棒棒团外包后台接口文档")
                 .termsOfServiceUrl("http://www.bangdna.com/")
                 .version("1.0.0-SNAPSHOT")
                 .build();

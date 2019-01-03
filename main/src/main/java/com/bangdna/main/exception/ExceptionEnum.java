@@ -16,7 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum ExceptionEnum {
 
+    GROUP_INFO_NOT_FOUND(404, "未查询到团队信息"),
 
+    QUERY_GROUP_MEMBER_BY_ID_IS_EMPTY(404, "通过团队id查询到的成员列表为空")
     ;
     /**
      * 异常返回状态码
