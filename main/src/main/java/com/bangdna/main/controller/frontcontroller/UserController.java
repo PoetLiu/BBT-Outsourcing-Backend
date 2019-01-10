@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -26,11 +28,13 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation("登录")
-    public String login(@RequestBody @Valid UserLoginVo vo){
+    public String login(HttpServletRequest request,
+                        @RequestBody @Valid UserLoginVo vo){
        // User user = userService.findUserByUsername(username);
-
+        HttpSession session = request.getSession();
+        session.setAttribute("user", vo);
         //if (!user.getPassword().equals())
-        return "hello";
+        return "ok";
     }
 
     @GetMapping("/hello")
