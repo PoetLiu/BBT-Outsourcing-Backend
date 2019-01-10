@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/group")
-@Api("团队接口")
+@Api(value = "group", description = "团队接口")
 public class GroupController {
 
     private final GroupService groupService;
