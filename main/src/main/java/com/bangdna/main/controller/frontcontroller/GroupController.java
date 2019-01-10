@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,8 +52,8 @@ public class GroupController {
     @GetMapping("/detail/list")
     @ApiOperation("开发日记列表")
     public ResponseEntity findGroupDiaryList(
-            @ApiParam(name = "page", value = "当前页码", required = true) Integer page,
-            @ApiParam(name = "size", value = "每页显示数量", required = true) Integer size){
+            @RequestParam("当前页码") Integer page,
+            @RequestParam("每页显示数量") Integer size){
         return ResponseEntity.ok(groupDevDiarySevice.findGroupDiaryListByPageByUpdateTimeSort(page, size));
     }
 }
