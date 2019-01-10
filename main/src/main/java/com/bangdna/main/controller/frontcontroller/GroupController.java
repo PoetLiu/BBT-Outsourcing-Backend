@@ -52,8 +52,8 @@ public class GroupController {
     @GetMapping("/detail/list")
     @ApiOperation("开发日记列表")
     public ResponseEntity findGroupDiaryList(
-            @RequestParam("当前页码") Integer page,
-            @RequestParam("每页显示数量") Integer size){
+            @RequestParam @ApiParam(value = "当前页码") Integer page,
+            @RequestParam @ApiParam(value = "每页显示数量") Integer size){
         return ResponseEntity.ok(groupDevDiarySevice.findGroupDiaryListByPageByUpdateTimeSort(page, size));
     }
 }
