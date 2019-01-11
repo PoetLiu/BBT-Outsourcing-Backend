@@ -1,5 +1,6 @@
 package com.bangdna.main.controller.frontcontroller;
 
+import com.bangdna.main.common.entity.RestfulEntity;
 import com.bangdna.main.entity.vo.UserLoginVo;
 import com.bangdna.main.entity.vo.UserRegisterVo;
 import io.swagger.annotations.Api;
@@ -22,19 +23,19 @@ import javax.validation.Valid;
 public class UserController {
     @PostMapping("/register")
     @ApiOperation("注册")
-    public String register(@RequestBody @Valid UserRegisterVo vo){
-        return "注册";
+    public RestfulEntity register(@RequestBody @Valid UserRegisterVo vo){
+        return RestfulEntity.getSucess(null);
     }
 
     @PostMapping("/login")
     @ApiOperation("登录")
-    public String login(HttpServletRequest request,
+    public RestfulEntity login(HttpServletRequest request,
                         @RequestBody @Valid UserLoginVo vo){
        // User user = userService.findUserByUsername(username);
         HttpSession session = request.getSession();
         session.setAttribute("user", vo);
         //if (!user.getPassword().equals())
-        return "ok";
+        return RestfulEntity.getSucess(null);
     }
 
     @GetMapping("/hello")

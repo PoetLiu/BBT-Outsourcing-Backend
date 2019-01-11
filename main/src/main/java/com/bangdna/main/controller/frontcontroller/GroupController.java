@@ -11,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +39,8 @@ public class GroupController {
 
     @GetMapping("/list")
     @ApiOperation("首页团队的展示，按照数据库内的order的排序，查找出2个团队列表")
-    public ResponseEntity<List<GroupVo>> groupList(){
-        return ResponseEntity.ok(groupService.findGroupList());
+    public RestfulEntity<List<GroupVo>> groupList() {
+        return RestfulEntity.getSucess(groupService.findGroupList());
     }
 
 
@@ -64,9 +63,9 @@ public class GroupController {
 
     @GetMapping("/dairy/list")
     @ApiOperation("开发日记列表")
-    public ResponseEntity findGroupDiaryList(
+    public RestfulEntity findGroupDiaryList(
             @RequestParam @ApiParam(value = "当前页码") Integer page,
             @RequestParam @ApiParam(value = "每页显示数量") Integer size){
-        return ResponseEntity.ok(groupDevDiarySevice.findGroupDiaryListByPageByUpdateTimeSort(page, size));
+        return RestfulEntity.getSucess(groupDevDiarySevice.findGroupDiaryListByPageByUpdateTimeSort(page, size));
     }
 }
