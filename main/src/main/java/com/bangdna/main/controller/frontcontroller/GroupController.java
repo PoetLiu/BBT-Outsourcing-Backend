@@ -49,7 +49,7 @@ public class GroupController {
         return ResponseEntity.ok(groupService.findGroupDetailByGroupId(id));
     }
 
-    @GetMapping("/detail/list")
+    @GetMapping("/dairy/list")
     @ApiOperation("开发日记列表")
     public ResponseEntity findGroupDiaryList(
             @RequestParam @ApiParam(value = "当前页码") Integer page,
