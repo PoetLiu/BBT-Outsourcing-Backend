@@ -1,5 +1,6 @@
 package com.bangdna.main.exception;
 
+import com.bangdna.main.common.entity.RestfulEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,13 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  **/
 
 @ControllerAdvice
-public class ControllerExceptionHander {
-
+public class ControllerExceptionHandler {
     @ExceptionHandler(CommonException.class)
-    public ResponseEntity<ExceptionResult> handleException(CommonException e){
-
-
-        return ResponseEntity.status(e.getExceptionEnum().getCode())
-                .body(new ExceptionResult(e.getExceptionEnum()));
+    public RestfulEntity handleException(CommonException e){
+        return RestfulEntity.getFailure(
+                e.getExceptionEnum().getCode(),
+                e.getExceptionEnum().getMsg(),
+                null);
     }
 }
