@@ -5,7 +5,6 @@ import com.bangdna.main.entity.Member;
 import com.bangdna.main.entity.vo.GroupDetailVo;
 import com.bangdna.main.entity.vo.GroupVo;
 import com.bangdna.main.exception.CommonException;
-import com.bangdna.main.exception.ExceptionEnum;
 import com.bangdna.main.repository.GroupRepository;
 import com.bangdna.main.repository.MemberRepository;
 import com.bangdna.main.service.GroupService;
@@ -17,8 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.bangdna.main.exception.ExceptionEnum.QUERY_GROUP_MEMBER_BY_ID_IS_EMPTY;
+import static com.bangdna.main.exception.ExceptionEnum.GROUP_INFO_NOT_FOUND;
 
 /**
  * @program: bangbangtuan-outsourcing-back-end
@@ -49,7 +47,7 @@ public class GroupServiceImpl implements GroupService {
 
         if (CollectionUtils.isEmpty(groupList)){
             log.error("未查询到首页显示的团队信息");
-            throw new CommonException(ExceptionEnum.GROUP_INFO_NOT_FOUND);
+            throw new CommonException(GROUP_INFO_NOT_FOUND);
         }
 
         for (Group group : groupList){
@@ -63,28 +61,27 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupDetailVo findGroupDetailByGroupId(Long id) {
+        Group group;
+        try {
+            group = groupRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new CommonException(GROUP_INFO_NOT_FOUND);
+        }
+
         GroupDetailVo groupDetailVo = new GroupDetailVo();
-
-        Group group = groupRepository.findById(id).get();
-
-        System.out.println(group);
+        groupDetailVo.setId(group.getId());
+        groupDetailVo.setName(group.getName());
+        groupDetailVo.setSkill(group.getSkill());
 
         List<Member> members = memberRepository.findMemberByGroupId(id);
         if (CollectionUtils.isEmpty(members)){
             log.error("通过团队id查询到的成员列表为空 id = #{}", id);
-            throw new CommonException(QUERY_GROUP_MEMBER_BY_ID_IS_EMPTY);
+            return groupDetailVo;
         }
 
         List<String> groupMemberNames = new ArrayList<>();
-
-        System.out.println(groupMemberNames);
-
         members.forEach(p -> groupMemberNames.add(p.getUsername()));
-
-        groupDetailVo.setId(group.getId());
-        groupDetailVo.setName(group.getName());
         groupDetailVo.setMember(groupMemberNames);
-        groupDetailVo.setSkill(group.getSkill());
 
         return groupDetailVo;
     }

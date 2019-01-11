@@ -1,7 +1,10 @@
 package com.bangdna.main.controller.frontcontroller;
 
+import com.bangdna.main.common.entity.RestfulEntity;
 import com.bangdna.main.entity.vo.GroupDetailVo;
 import com.bangdna.main.entity.vo.GroupVo;
+import com.bangdna.main.exception.CommonException;
+import com.bangdna.main.exception.ExceptionEnum;
 import com.bangdna.main.service.GroupDevDiarySevice;
 import com.bangdna.main.service.GroupService;
 import io.swagger.annotations.Api;
@@ -44,9 +47,19 @@ public class GroupController {
 
     @GetMapping("/{id}")
     @ApiOperation("通过id查询团队详情")
-    public ResponseEntity<GroupDetailVo> findGroupDetail(
+    public RestfulEntity<GroupDetailVo> findGroupDetail(
             @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id){
-        return ResponseEntity.ok(groupService.findGroupDetailByGroupId(id));
+        GroupDetailVo data = null;
+        try {
+             data = groupService.findGroupDetailByGroupId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (e instanceof CommonException) {
+                ExceptionEnum en = ((CommonException)e).getExceptionEnum();
+                return RestfulEntity.getFailure(en.getCode(), en.getMsg(), null);
+            }
+        }
+        return RestfulEntity.getSucess(data);
     }
 
     @GetMapping("/dairy/list")
