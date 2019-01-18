@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @program: bangbangtuan-outsourcing-back-end
@@ -23,5 +25,9 @@ public class User extends BaseEntity {
     private String username;
 
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "bbt_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
 }

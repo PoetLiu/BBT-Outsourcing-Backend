@@ -32,8 +32,6 @@ public class UserController {
     public RestfulEntity login(HttpServletRequest request,
                         @RequestBody @Valid UserLoginVo vo){
        // User user = userService.findUserByUsername(username);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", vo);
         //if (!user.getPassword().equals())
         return RestfulEntity.getSucess(null);
     }
