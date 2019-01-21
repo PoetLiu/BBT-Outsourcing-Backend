@@ -3,6 +3,8 @@ package com.bangdna.main.repository;
 import com.bangdna.main.common.repository.BaseRepository;
 import com.bangdna.main.entity.User;
 
+import java.util.Optional;
+
 /**
  * @program: bangbangtuan-outsourcing-back-end
  * @author: Abel Lee
@@ -10,4 +12,5 @@ import com.bangdna.main.entity.User;
  **/
 
 public interface UserRepository extends BaseRepository<User, Long> {
+    Optional<User> findByUsername(String username);
 }
