@@ -1,5 +1,6 @@
 package com.bangdna.main.controller.frontcontroller;
 
+import com.bangdna.main.common.entity.RestfulEntity;
 import com.bangdna.main.entity.vo.GroupDetailVo;
 import com.bangdna.main.entity.vo.GroupVo;
 import com.bangdna.main.service.GroupDevDiarySevice;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import com.bangdna.main.exception.CommonException;
+import com.bangdna.main.exception.ExceptionEnum;
 
 /**
  * @program: bangbangtuan-outsourcing-back-end
