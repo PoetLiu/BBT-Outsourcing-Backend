@@ -44,9 +44,19 @@ public class GroupController {
 
     @GetMapping("/{id}")
     @ApiOperation("通过id查询团队详情")
-    public ResponseEntity<GroupDetailVo> findGroupDetail(
-            @ApiParam(value = "团队id", required = true) @PathVariable Long id){
-        return ResponseEntity.ok(groupService.findGroupDetailByGroupId(id));
+    public RestfulEntity<GroupDetailVo> findGroupDetail(
+            @ApiParam(name = "团队id", value = "团队id", required = true) @PathVariable Long id){
+        GroupDetailVo data = null;
+        try {
+             data = groupService.findGroupDetailByGroupId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (e instanceof CommonException) {
+                ExceptionEnum en = ((CommonException)e).getExceptionEnum();
+                return RestfulEntity.getFailure(en.getCode(), en.getMsg(), null);
+            }
+        }
+        return RestfulEntity.getSucess(data);
     }
 
     @GetMapping("/detail/list")

@@ -19,7 +19,7 @@ public interface GroupRepository extends BaseRepository<Group, Long> {
     /**
      * 首页查找两条根据order排序的前两个团队
      */
-    @Query(value = "select * from `group` order by `order` limit 2", nativeQuery = true)
+    @Query(value = "select * from `bbt_group` order by `order` limit 2", nativeQuery = true)
     List<Group> findTwoGroups();
 
 
