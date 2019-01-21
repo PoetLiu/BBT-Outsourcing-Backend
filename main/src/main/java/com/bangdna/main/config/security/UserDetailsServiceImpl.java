@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         () -> new UsernameNotFoundException(username+"not found"));
         HashSet<GrantedAuthority> authorities = new HashSet<>();
         if (user.getRoles() != null) {
-            user.getRoles.steam()
+            user.getRoles().stream()
                     .map(Role::getName)
                     .map(SimpleGrantedAuthority::new)
                     .forEach(authorities::add);
