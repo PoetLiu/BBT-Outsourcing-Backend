@@ -45,7 +45,7 @@ public class GroupController {
     @GetMapping("/{id}")
     @ApiOperation("通过id查询团队详情")
     public ResponseEntity<GroupDetailVo> findGroupDetail(
-            @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id){
+            @ApiParam(value = "团队id", required = true) @PathVariable Long id){
         return ResponseEntity.ok(groupService.findGroupDetailByGroupId(id));
     }
 
