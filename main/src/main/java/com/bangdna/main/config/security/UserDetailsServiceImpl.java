@@ -25,7 +25,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userService
                 .getByUsername(username)
                 .orElseThrow(
-                        () -> new UsernameNotFoundException(username+"not found"));
+                        () -> new UsernameNotFoundException(username+"not found")
+                );
         HashSet<GrantedAuthority> authorities = new HashSet<>();
         if (user.getRoles() != null) {
             user.getRoles().stream()

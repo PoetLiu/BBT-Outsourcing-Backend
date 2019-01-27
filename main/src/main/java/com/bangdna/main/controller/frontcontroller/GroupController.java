@@ -32,7 +32,8 @@ public class GroupController {
     private final GroupDevDiarySevice groupDevDiarySevice;
 
     @Autowired
-    public GroupController(GroupService groupService, GroupDevDiarySevice groupDevDiarySevice) {
+    public GroupController(GroupService groupService,
+                           GroupDevDiarySevice groupDevDiarySevice) {
         this.groupService = groupService;
         this.groupDevDiarySevice = groupDevDiarySevice;
     }
@@ -48,7 +49,7 @@ public class GroupController {
     @GetMapping("/{id}")
     @ApiOperation("通过id查询团队详情")
     public RestfulEntity<GroupDetailVo> findGroupDetail(
-            @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id){
+            @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id) {
         GroupDetailVo data = null;
         try {
              data = groupService.findGroupDetailByGroupId(id);
