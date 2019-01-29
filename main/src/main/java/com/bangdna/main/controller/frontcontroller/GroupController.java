@@ -32,7 +32,8 @@ public class GroupController {
     private final GroupDevDiarySevice groupDevDiarySevice;
 
     @Autowired
-    public GroupController(GroupService groupService, GroupDevDiarySevice groupDevDiarySevice) {
+    public GroupController(GroupService groupService,
+                           GroupDevDiarySevice groupDevDiarySevice) {
         this.groupService = groupService;
         this.groupDevDiarySevice = groupDevDiarySevice;
     }
