@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommonException extends RuntimeException{
+public class CommonException extends RuntimeException {
 
     private ExceptionEnum exceptionEnum;
 }

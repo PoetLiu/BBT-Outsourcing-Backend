@@ -3,6 +3,7 @@ package com.bangdna.main.entity.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 
 @Data

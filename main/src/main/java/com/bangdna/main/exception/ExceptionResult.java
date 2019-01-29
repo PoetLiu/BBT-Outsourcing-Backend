@@ -22,7 +22,7 @@ public class ExceptionResult {
     private Date timestamp;
 
 
-    public ExceptionResult(ExceptionEnum exceptionEnum){
+    public ExceptionResult(ExceptionEnum exceptionEnum) {
         this.status = exceptionEnum.getCode();
         this.msg = exceptionEnum.getMsg();
         this.timestamp = new Date();

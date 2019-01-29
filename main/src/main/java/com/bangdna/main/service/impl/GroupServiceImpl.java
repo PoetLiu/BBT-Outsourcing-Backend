@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.bangdna.main.exception.ExceptionEnum.GROUP_INFO_NOT_FOUND;
 
 /**
@@ -45,12 +46,12 @@ public class GroupServiceImpl implements GroupService {
         List<Group> groupList = groupRepository.findTwoGroups();
         List<GroupVo> groupVoList = new ArrayList<>();
 
-        if (CollectionUtils.isEmpty(groupList)){
+        if (CollectionUtils.isEmpty(groupList)) {
             log.error("未查询到首页显示的团队信息");
             throw new CommonException(GROUP_INFO_NOT_FOUND);
         }
 
-        for (Group group : groupList){
+        for (Group group : groupList) {
             GroupVo groupVo = new GroupVo();
             BeanUtils.copyProperties(group, groupVo);
             groupVoList.add(groupVo);
@@ -74,7 +75,7 @@ public class GroupServiceImpl implements GroupService {
         groupDetailVo.setSkill(group.getSkill());
 
         List<Member> members = memberRepository.findMemberByGroupId(id);
-        if (CollectionUtils.isEmpty(members)){
+        if (CollectionUtils.isEmpty(members)) {
             log.error("通过团队id查询到的成员列表为空 id = #{}", id);
             return groupDetailVo;
         }

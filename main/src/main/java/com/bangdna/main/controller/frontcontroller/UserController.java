@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -23,21 +22,21 @@ import javax.validation.Valid;
 public class UserController {
     @PostMapping("/register")
     @ApiOperation("注册")
-    public RestfulEntity register(@RequestBody @Valid UserRegisterVo vo){
+    public RestfulEntity register(@RequestBody @Valid UserRegisterVo vo) {
         return RestfulEntity.getSucess(null);
     }
 
     @PostMapping("/login")
     @ApiOperation("登录")
     public RestfulEntity login(HttpServletRequest request,
-                        @RequestBody @Valid UserLoginVo vo){
-       // User user = userService.findUserByUsername(username);
+                               @RequestBody @Valid UserLoginVo vo) {
+        // User user = userService.findUserByUsername(username);
         //if (!user.getPassword().equals())
         return RestfulEntity.getSucess(null);
     }
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "hello";
     }
 }

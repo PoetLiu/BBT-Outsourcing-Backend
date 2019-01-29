@@ -3,6 +3,8 @@ package com.bangdna.main.controller.frontcontroller;
 import com.bangdna.main.common.entity.RestfulEntity;
 import com.bangdna.main.entity.vo.GroupDetailVo;
 import com.bangdna.main.entity.vo.GroupVo;
+import com.bangdna.main.exception.CommonException;
+import com.bangdna.main.exception.ExceptionEnum;
 import com.bangdna.main.service.GroupDevDiarySevice;
 import com.bangdna.main.service.GroupService;
 import io.swagger.annotations.Api;
@@ -13,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import com.bangdna.main.exception.CommonException;
-import com.bangdna.main.exception.ExceptionEnum;
 
 /**
  * @program: bangbangtuan-outsourcing-back-end
@@ -40,7 +40,7 @@ public class GroupController {
 
     @GetMapping("/list")
     @ApiOperation("首页团队的展示，按照数据库内的order的排序，查找出2个团队列表")
-    public ResponseEntity<List<GroupVo>> groupList(){
+    public ResponseEntity<List<GroupVo>> groupList() {
         return ResponseEntity.ok(groupService.findGroupList());
     }
 
@@ -48,14 +48,14 @@ public class GroupController {
     @GetMapping("/{id}")
     @ApiOperation("通过id查询团队详情")
     public RestfulEntity<GroupDetailVo> findGroupDetail(
-            @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id){
+            @ApiParam(name = "id", value = "团队id", required = true) @PathVariable Long id) {
         GroupDetailVo data = null;
         try {
-             data = groupService.findGroupDetailByGroupId(id);
+            data = groupService.findGroupDetailByGroupId(id);
         } catch (Exception e) {
             e.printStackTrace();
             if (e instanceof CommonException) {
-                ExceptionEnum en = ((CommonException)e).getExceptionEnum();
+                ExceptionEnum en = ((CommonException) e).getExceptionEnum();
                 return RestfulEntity.getFailure(en.getCode(), en.getMsg(), null);
             }
         }
@@ -66,7 +66,7 @@ public class GroupController {
     @ApiOperation("开发日记列表")
     public ResponseEntity findGroupDiaryList(
             @RequestParam @ApiParam(value = "当前页码") Integer page,
-            @RequestParam @ApiParam(value = "每页显示数量") Integer size){
+            @RequestParam @ApiParam(value = "每页显示数量") Integer size) {
         return ResponseEntity.ok(groupDevDiarySevice.findGroupDiaryListByPageByUpdateTimeSort(page, size));
     }
 }

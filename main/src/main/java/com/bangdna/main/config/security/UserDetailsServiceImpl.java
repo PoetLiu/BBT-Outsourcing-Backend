@@ -1,7 +1,7 @@
 package com.bangdna.main.config.security;
 
-import com.bangdna.main.entity.User;
 import com.bangdna.main.entity.Role;
+import com.bangdna.main.entity.User;
 import com.bangdna.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,8 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService
                 .getByUsername(username)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException(username+"not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(username + "not found"));
         HashSet<GrantedAuthority> authorities = new HashSet<>();
         if (user.getRoles() != null) {
             user.getRoles().stream()

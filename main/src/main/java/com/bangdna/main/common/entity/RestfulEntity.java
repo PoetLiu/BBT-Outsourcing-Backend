@@ -25,10 +25,10 @@ public class RestfulEntity<T> {
 
     public RestfulEntity(Boolean status, Boolean auth, int code, String msg, T data) {
         this.status = status;
-        this.auth   = auth;
-        this.code   = code;
-        this.msg    = msg;
-        this.data    = data;
+        this.auth = auth;
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
     }
 
     public static <T> RestfulEntity<T> getSucess(T data) {
