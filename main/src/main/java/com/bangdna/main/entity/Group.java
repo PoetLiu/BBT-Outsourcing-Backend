@@ -26,4 +26,6 @@ public class Group extends BaseEntity {
     private String skill;
 
     private Integer order;
+
+    private String introduction;
 }

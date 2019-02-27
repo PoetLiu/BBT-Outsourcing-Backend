@@ -62,17 +62,11 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupDetailVo findGroupDetailByGroupId(Long id) {
-        Group group;
-        try {
-            group = groupRepository.findById(id).get();
-        } catch (Exception e) {
-            throw new CommonException(GROUP_INFO_NOT_FOUND);
-        }
-
         GroupDetailVo groupDetailVo = new GroupDetailVo();
-        groupDetailVo.setId(group.getId());
-        groupDetailVo.setName(group.getName());
-        groupDetailVo.setSkill(group.getSkill());
+        groupRepository.findById(id).map(group -> {
+            BeanUtils.copyProperties(group, groupDetailVo);
+            return group;
+        }).orElseThrow(() -> new CommonException(GROUP_INFO_NOT_FOUND));
 
         List<Member> members = memberRepository.findMemberByGroupId(id);
         if (CollectionUtils.isEmpty(members)) {

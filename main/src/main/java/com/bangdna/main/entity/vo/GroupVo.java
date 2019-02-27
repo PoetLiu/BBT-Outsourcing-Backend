@@ -19,4 +19,7 @@ public class GroupVo implements Serializable {
     private String name;
 
     private String skill;
+
+    private String introduction;
+    
 }
