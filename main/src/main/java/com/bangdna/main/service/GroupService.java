@@ -17,7 +17,7 @@ public interface GroupService {
     /**
      * 获取团队列表按照排序值取两个
      */
-    List<GroupVo> findGroupList();
+    List<GroupVo> findGroupList(Integer page, Integer size);
 
 
     /**

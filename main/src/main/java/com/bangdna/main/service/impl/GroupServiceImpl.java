@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,17 +45,13 @@ public class GroupServiceImpl implements GroupService {
 
 
     @Override
-    public List<GroupVo> findGroupList() {
+    public List<GroupVo> findGroupList(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page - 1, size,
+                new Sort(Sort.Direction.ASC, "order"));
+        Page<Group> groupList = groupRepository.findAll(pageable);
 
-        List<Group> groupList = groupRepository.findTwoGroups();
         List<GroupVo> groupVoList = new ArrayList<>();
-
-        if (CollectionUtils.isEmpty(groupList)) {
-            log.error("未查询到首页显示的团队信息");
-            throw new CommonException(GROUP_INFO_NOT_FOUND);
-        }
-
-        for (Group group : groupList) {
+        for (Group group : groupList.getContent()) {
             GroupVo groupVo = new GroupVo();
             BeanUtils.copyProperties(group, groupVo);
             groupVoList.add(groupVo);

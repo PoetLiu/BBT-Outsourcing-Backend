@@ -40,9 +40,11 @@ public class GroupController {
 
 
     @GetMapping("/list")
-    @ApiOperation("首页团队的展示，按照数据库内的order的排序，查找出2个团队列表")
-    public ResponseEntity<List<GroupVo>> groupList() {
-        return ResponseEntity.ok(groupService.findGroupList());
+    @ApiOperation("首页团队的展示，按照数据库内的order的排序")
+    public ResponseEntity<List<GroupVo>> groupList(
+            @RequestParam @ApiParam(value = "页码") Integer page,
+            @RequestParam @ApiParam(value = "每页显示数量") Integer size) {
+        return ResponseEntity.ok(groupService.findGroupList(page, size));
     }
 
 
